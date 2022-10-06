@@ -1831,7 +1831,7 @@ GameObject:
   - component: {fileID: 4949727841242462705}
   - component: {fileID: 4949727841242462718}
   - component: {fileID: 4949727841242462713}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: XRRigMultiplayer
   m_TagString: Player
   m_Icon: {fileID: 0}
