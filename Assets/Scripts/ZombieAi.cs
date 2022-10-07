@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 public class ZombieAi : NetworkBehaviour
 {
-    public NavMeshAgent agent;
+    
 
     public LayerMask whatIsGround, whatIsPlayer;
 
@@ -25,7 +25,13 @@ public class ZombieAi : NetworkBehaviour
     public float sightRange, meleeAttackRange;
     public bool playerInSightRange, playerInMeleeAttackRange;
 
+    private Animator Animator;
+    private NavMeshAgent Agent;
 
+    private Vector2 Velocity;
+    private Vector2 SmoothDeltaPosition;
+
+    private String State;
 
     public override void OnNetworkSpawn()
     {
@@ -33,12 +39,26 @@ public class ZombieAi : NetworkBehaviour
 
         if (!IsOwner) return;
 
-        agent = GetComponent<NavMeshAgent>();
+        Agent = GetComponent<NavMeshAgent>();
+        Animator = GetComponent<Animator>();
+        Agent.updatePosition = false;
+        Agent.updateRotation = true;
+    }
+
+    private void OnAnimatorMove()
+    {
+        if (!IsOwner) return;
+
+        Vector3 rootPosition = Animator.rootPosition;
+        rootPosition.y = Agent.nextPosition.y;
+        transform.position = rootPosition;
+        Agent.nextPosition = rootPosition;
     }
 
     public void Update()
     {
         if (!IsOwner) return;
+
         player = FindTarget();
 
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
@@ -47,6 +67,50 @@ public class ZombieAi : NetworkBehaviour
         if (!playerInSightRange && !playerInMeleeAttackRange) Patroling();
         if (playerInSightRange && !playerInMeleeAttackRange) ChasePlayer();
         if (playerInSightRange && playerInMeleeAttackRange) AttackPlayer();
+
+        //SynchronizeAnimatorAndAgent();
+    }
+
+
+
+    private void SynchronizeAnimatorAndAgent()
+    {
+        Vector3 worldDeltaPosition = Agent.nextPosition - transform.position;
+        worldDeltaPosition.y = 0;
+
+        float dx = Vector3.Dot(transform.right, worldDeltaPosition);
+        float dy = Vector3.Dot(transform.forward, worldDeltaPosition);
+        Vector2 deltaPosition = new Vector2(dx, dy);
+
+        float smooth = Mathf.Min(1, Time.deltaTime / 0.1f);
+        SmoothDeltaPosition = Vector2.Lerp(SmoothDeltaPosition, deltaPosition, smooth);
+
+        Velocity = SmoothDeltaPosition / Time.deltaTime;
+        if (Agent.remainingDistance <= Agent.stoppingDistance)
+        {
+            Velocity = Vector2.Lerp(
+                Vector2.zero,
+                Velocity,
+                Agent.remainingDistance / Agent.stoppingDistance
+            );
+        }
+
+        bool shouldMove = Velocity.magnitude > 0.5f
+            && Agent.remainingDistance > Agent.stoppingDistance;
+
+        Animator.SetBool("chase", shouldMove);
+
+        Animator.SetFloat("locomotion", Velocity.magnitude);
+
+        float deltaMagnitude = worldDeltaPosition.magnitude;
+        if (deltaMagnitude > Agent.radius / 2f)
+        {
+            transform.position = Vector3.Lerp(
+                Animator.rootPosition,
+                Agent.nextPosition,
+                smooth
+            );
+        }
     }
 
     private void Patroling()
@@ -54,13 +118,17 @@ public class ZombieAi : NetworkBehaviour
         if (!walkPointSet) SearchWalkPoint();
 
         if (walkPointSet)
-            agent.SetDestination(walkPoint);
+            Agent.SetDestination(walkPoint);
 
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
         // WalkPoint reached
         if (distanceToWalkPoint.magnitude < 1f)
             walkPointSet = false;
+
+        Animator.SetBool("move", true);
+        Animator.SetBool("attack", false);
+        Animator.SetBool("chase", false);
     }
 
     private void SearchWalkPoint()
@@ -79,13 +147,17 @@ public class ZombieAi : NetworkBehaviour
 
     private void ChasePlayer()
     {
-        agent.SetDestination(player.position);
+        Agent.SetDestination(player.position);
+        Animator.SetBool("chase", true);
+        Animator.SetBool("move", false);
+        Animator.SetBool("attack", false);
+        
     }
 
     private void AttackPlayer()
     {
         //Make sure enemy doesn't move
-        agent.SetDestination(transform.position);
+        Agent.SetDestination(transform.position);
 
         transform.LookAt(player);
 
@@ -95,6 +167,9 @@ public class ZombieAi : NetworkBehaviour
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
+        Animator.SetBool("attack", true);
+        Animator.SetBool("move", false);
+        Animator.SetBool("chase", false);
     }
 
     private void ResetAttack()
