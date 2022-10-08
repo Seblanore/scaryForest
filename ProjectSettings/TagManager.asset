@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Right Hand
   - Left Hand
+  - limb
+  - head
+  - body
   layers:
   - Default
   - TransparentFX

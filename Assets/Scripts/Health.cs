@@ -30,29 +30,42 @@ public class Health : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float amount, Vector3 direction)
+    public void TakeDamage(float amount, Vector3 direction, Rigidbody rb)
     {
-        currentHealth -= amount;
-        source.Stop();
-        source.clip = damagedClips[Random.Range(0, damagedClips.Length)];
-        source.Play();
-
-        if (currentHealth <= 0.0f && isAlive)
+        if(isAlive)
         {
-            Die(direction);
-        }
+            currentHealth -= amount;
+            source.Stop();
+            source.clip = damagedClips[Random.Range(0, damagedClips.Length)];
+            source.Play();
+
+            if (currentHealth <= 0.0f)
+            {
+                Die(direction, rb);
+            }
+        } else
+        {
+            direction.y = 1;
+            ApplyForce(rb, direction * dieForce);
+        }  
     }
 
-    private void Die(Vector3 direction)
+    private void Die(Vector3 direction, Rigidbody rb)
     {
         ragdoll.ActivateRagdoll();
         direction.y = 1;
-        ragdoll.ApplyForce(direction * dieForce);
+        ApplyForce(rb, direction * dieForce);
 
         Destroy(GetComponent<NavMeshAgent>());
         Destroy(GetComponent<ZombieAi>());
         Destroy(GetComponent<SoundRandomiser>());
         Destroy(GetComponent<AudioSource>());
         isAlive = false;
+    }
+
+    public void ApplyForce(Rigidbody rb, Vector3 force)
+    {
+
+        rb.AddForce(force, ForceMode.VelocityChange);
     }
 }

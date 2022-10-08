@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 0}
+  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -135,7 +135,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-109022
+  m_Name: pb_Mesh31738
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -368,7 +368,7 @@ PrefabInstance:
     - target: {fileID: 6306244785337676184, guid: cc00f6904c2166a4a875a3a079e44235,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 51.67
+      value: 13.84
       objectReference: {fileID: 0}
     - target: {fileID: 6306244785337676184, guid: cc00f6904c2166a4a875a3a079e44235,
         type: 3}
@@ -442,7 +442,7 @@ PrefabInstance:
     - target: {fileID: 6306244785337676184, guid: cc00f6904c2166a4a875a3a079e44235,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 51.67
+      value: 13.84
       objectReference: {fileID: 0}
     - target: {fileID: 6306244785337676184, guid: cc00f6904c2166a4a875a3a079e44235,
         type: 3}
@@ -615,7 +615,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-100094
+  m_Name: pb_Mesh31722
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -870,7 +870,7 @@ PrefabInstance:
     - target: {fileID: 6306244785337676184, guid: cc00f6904c2166a4a875a3a079e44235,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 51.67
+      value: 13.84
       objectReference: {fileID: 0}
     - target: {fileID: 6306244785337676184, guid: cc00f6904c2166a4a875a3a079e44235,
         type: 3}
@@ -2835,7 +2835,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-29488
+  m_Name: pb_Mesh31676
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3130,7 +3130,7 @@ PrefabInstance:
     - target: {fileID: 6306244785337676184, guid: cc00f6904c2166a4a875a3a079e44235,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 51.67
+      value: 13.84
       objectReference: {fileID: 0}
     - target: {fileID: 6306244785337676184, guid: cc00f6904c2166a4a875a3a079e44235,
         type: 3}

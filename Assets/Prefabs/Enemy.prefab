@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 6102941320189897152}
   m_Layer: 0
   m_Name: Base HumanLLegFoot
-  m_TagString: Untagged
+  m_TagString: limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -612,7 +612,7 @@ GameObject:
   - component: {fileID: 4479168562094942926}
   m_Layer: 0
   m_Name: Base HumanLArmForearm
-  m_TagString: Untagged
+  m_TagString: limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -675,7 +675,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.26574138, y: -0.0000000037252899, z: -0.00000013597314}
+  m_ConnectedAnchor: {x: -0.26574144, y: -0.00000020489094, z: -0.000000063329956}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: -1}
   m_TwistLimitSpring:
@@ -755,7 +755,7 @@ GameObject:
   - component: {fileID: 1775787334198601095}
   m_Layer: 0
   m_Name: Base HumanRArmForearm
-  m_TagString: Untagged
+  m_TagString: limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -817,7 +817,7 @@ CharacterJoint:
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
-  m_AutoConfigureConnectedAnchor: 1
+  m_AutoConfigureConnectedAnchor: 0
   m_ConnectedAnchor: {x: -0.26574114, y: -0.0000000856817, z: 0.000000111758666}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
@@ -976,7 +976,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2407666602573850336}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
@@ -1010,7 +1010,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2407666602573850336}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 98badd11e76e16841af4c5f5782a0118, type: 3}
   m_Name: 
@@ -1040,8 +1040,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94298e44f6af6724597c5a34d2c8e14a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dieForce: 25
-  maxHealth: 20
+  dieForce: 10
+  maxHealth: 30
   currentHealth: 0
   damagedClips:
   - {fileID: 8300000, guid: bdb798b20d5ac2f438f3a562f4150019, type: 3}
@@ -1280,7 +1280,7 @@ GameObject:
   - component: {fileID: 3552477568114924509}
   m_Layer: 0
   m_Name: Base HumanSpine2
-  m_TagString: Untagged
+  m_TagString: body
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1328,8 +1328,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.2851449, y: 0.20968378, z: 0.32230604}
-  m_Center: {x: -0.19757147, y: 0.0058093104, z: -0.0038723114}
+  m_Size: {x: 0.35212344, y: 0.23109698, z: 0.32230604}
+  m_Center: {x: -0.18729696, y: -0.0048972517, z: -0.0038723142}
 --- !u!144 &3552477568114924509
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -2200,7 +2200,7 @@ GameObject:
   - component: {fileID: 8968597961710279778}
   m_Layer: 0
   m_Name: Base HumanRCalf
-  m_TagString: Untagged
+  m_TagString: limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2586,11 +2586,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4877545469949962011}
   - component: {fileID: 330207642741107951}
-  - component: {fileID: 4065325805536005742}
   - component: {fileID: 6492993823771194435}
+  - component: {fileID: 9135701379277504463}
   m_Layer: 0
   m_Name: Base HumanHead
-  m_TagString: Untagged
+  m_TagString: head
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2631,19 +2631,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!135 &4065325805536005742
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6209713206634916727}
-  m_Material: {fileID: 13400000, guid: 867ad0e34345fc44a991d0b91cff1d59, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.095
-  m_Center: {x: -0.07, y: 0.03, z: 0}
 --- !u!144 &6492993823771194435
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -2656,7 +2643,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: -1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.47087502, y: 0.07065612, z: -0.000000033079992}
+  m_ConnectedAnchor: {x: -0.47087497, y: 0.07065642, z: -0.000000036805282}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -2690,6 +2677,20 @@ CharacterJoint:
   m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!136 &9135701379277504463
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6209713206634916727}
+  m_Material: {fileID: 13400000, guid: 867ad0e34345fc44a991d0b91cff1d59, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.07448298
+  m_Height: 0.2417312
+  m_Direction: 0
+  m_Center: {x: -0.043497853, y: 0.032365527, z: -0.0007244214}
 --- !u!1 &6511771175595687910
 GameObject:
   m_ObjectHideFlags: 0
@@ -2798,7 +2799,7 @@ GameObject:
   - component: {fileID: 6626687270781962203}
   m_Layer: 0
   m_Name: Base HumanLLegCalf
-  m_TagString: Untagged
+  m_TagString: limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2941,7 +2942,7 @@ GameObject:
   - component: {fileID: 554864683311744451}
   m_Layer: 0
   m_Name: Base HumanRThigh
-  m_TagString: Untagged
+  m_TagString: limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3052,7 +3053,7 @@ GameObject:
   - component: {fileID: 4379052589713105385}
   m_Layer: 0
   m_Name: Base HumanRArmPalm
-  m_TagString: Untagged
+  m_TagString: limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3119,7 +3120,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.27302438, y: -0.000000026077036, z: 0.00000003632158}
+  m_ConnectedAnchor: {x: -0.27302447, y: 0.00000022351745, z: 0.0000001010485}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -3324,7 +3325,7 @@ GameObject:
   - component: {fileID: 1602904758095299935}
   m_Layer: 0
   m_Name: Base HumanRFoot
-  m_TagString: Untagged
+  m_TagString: limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3631,7 +3632,7 @@ GameObject:
   - component: {fileID: 5060871097851495364}
   m_Layer: 0
   m_Name: Base HumanLArmPalm
-  m_TagString: Untagged
+  m_TagString: limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3698,7 +3699,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.27302456, y: -0.00000008381904, z: 0.00000003026798}
+  m_ConnectedAnchor: {x: -0.27302465, y: 0.000000042840842, z: 0.000000073108815}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -3746,7 +3747,7 @@ GameObject:
   - component: {fileID: 2123582679986513620}
   m_Layer: 0
   m_Name: Base HumanRArmUpperarm
-  m_TagString: Untagged
+  m_TagString: limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3809,7 +3810,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.30387688, y: -0.03687361, z: -0.17756367}
+  m_ConnectedAnchor: {x: -0.3038769, y: -0.0368738, z: -0.17756365}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -3945,7 +3946,7 @@ GameObject:
   - component: {fileID: 6225155586238177095}
   m_Layer: 0
   m_Name: Base HumanPelvis
-  m_TagString: Untagged
+  m_TagString: body
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3983,7 +3984,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 2
 --- !u!65 &6225155586238177095
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3995,8 +3996,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.27080214, y: 0.28194922, z: 0.35512716}
-  m_Center: {x: -0.13540107, y: 0.0031102449, z: -0.00000016391277}
+  m_Size: {x: 0.2708021, y: 0.23513697, z: 0.35512716}
+  m_Center: {x: -0.1354017, y: 0.049604528, z: -0.00000016933139}
 --- !u!1 &8487683214957462720
 GameObject:
   m_ObjectHideFlags: 0
@@ -4078,7 +4079,7 @@ GameObject:
   - component: {fileID: 1777487209287708153}
   m_Layer: 0
   m_Name: Base HumanLLegThigh
-  m_TagString: Untagged
+  m_TagString: limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4439,7 +4440,7 @@ GameObject:
   - component: {fileID: 8152645584337409214}
   m_Layer: 0
   m_Name: Base HumanLArmUpperarm
-  m_TagString: Untagged
+  m_TagString: limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4502,7 +4503,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: -1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.30387634, y: -0.03687367, z: 0.17756344}
+  m_ConnectedAnchor: {x: -0.30387637, y: -0.03687386, z: 0.17756346}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:

@@ -7,27 +7,18 @@ public class BulletTarget : NetworkBehaviour
 {
     [SerializeField] private Transform blood;
 
-    private Rigidbody bulletRigidbody;
-
-    public override void OnNetworkSpawn()
-    {
-        bulletRigidbody = GetComponent<Rigidbody>();
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if(other.material.name == "Zombie Flesh (Instance)")
         {
             Instantiate(blood, transform.position, Quaternion.LookRotation(-transform.forward));
         }
-
-        Rigidbody rb = other.GetComponent<Rigidbody>();
-        if(rb != null) rb.AddExplosionForce(100, transform.position, 10);
-
+     
         var hitBox = other.GetComponent<HitBox>();
         if(hitBox)
         {
             hitBox.OnHit(transform.forward);
         }
+        Destroy(gameObject);
     }
 }
