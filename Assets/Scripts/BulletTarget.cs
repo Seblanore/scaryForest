@@ -16,7 +16,7 @@ public class BulletTarget : NetworkBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Instantiate(blood, transform.position, Quaternion.LookRotation(-transform.forward));
-        other.GetComponent<Rigidbody>().AddExplosionForce(10, transform.position, 10);
+        other.GetComponent<Rigidbody>().AddExplosionForce(100, transform.position, 10);
         var hitBox = other.GetComponent<HitBox>();
         if(hitBox)
         {

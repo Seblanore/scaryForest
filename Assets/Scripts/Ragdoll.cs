@@ -5,12 +5,17 @@ using UnityEngine;
 
 public class Ragdoll : MonoBehaviour
 {
-    Rigidbody[] rigidBodies;
+    private Rigidbody[] rigidBodies;
+    private CharacterJoint[] joints;
+    private Collider[] colliders;
+
     Animator animator;
 
     private void Start()
     {
         rigidBodies = GetComponentsInChildren<Rigidbody>();
+        colliders = GetComponentsInChildren<Collider>();
+        joints = GetComponentsInChildren<CharacterJoint>();
         animator = GetComponent<Animator>();
 
         DeativateRagdoll();
@@ -32,5 +37,11 @@ public class Ragdoll : MonoBehaviour
             rigidBody.isKinematic = false;
         }
         animator.enabled = false;
+    }
+
+    public void ApplyForce(Vector3 force)
+    {
+        var rigidBody = animator.GetBoneTransform(HumanBodyBones.Hips).GetComponent<Rigidbody>();
+        rigidBody.AddForce(force, ForceMode.VelocityChange);
     }
 }
