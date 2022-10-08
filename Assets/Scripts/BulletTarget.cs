@@ -20,8 +20,10 @@ public class BulletTarget : NetworkBehaviour
         {
             Instantiate(blood, transform.position, Quaternion.LookRotation(-transform.forward));
         }
-        
-        other.GetComponent<Rigidbody>().AddExplosionForce(100, transform.position, 10);
+
+        Rigidbody rb = other.GetComponent<Rigidbody>();
+        if(rb != null) rb.AddExplosionForce(100, transform.position, 10);
+
         var hitBox = other.GetComponent<HitBox>();
         if(hitBox)
         {

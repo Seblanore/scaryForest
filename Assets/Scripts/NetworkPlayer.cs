@@ -11,6 +11,8 @@ public class NetworkPlayer : NetworkBehaviour
     {
         base.OnNetworkSpawn();
 
+        Destroy(GameObject.Find("AudioListener"));
+
         DisableClientInput();
     }
 

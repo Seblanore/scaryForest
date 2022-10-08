@@ -1,6 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,10 +9,17 @@ public class Health : MonoBehaviour
     public float currentHealth;
     Ragdoll ragdoll;
 
+    public AudioClip[] damagedClips;
+    private AudioSource source;
+
+    private bool isAlive = true;
+
 
     void Start()
     {
         ragdoll = GetComponent<Ragdoll>();
+        source = GetComponent<AudioSource>();
+
         currentHealth = maxHealth;
 
         var rigidBodies = GetComponentsInChildren<Rigidbody>();
@@ -28,7 +33,11 @@ public class Health : MonoBehaviour
     public void TakeDamage(float amount, Vector3 direction)
     {
         currentHealth -= amount;
-        if(currentHealth <= 0.0f)
+        source.Stop();
+        source.clip = damagedClips[Random.Range(0, damagedClips.Length)];
+        source.Play();
+
+        if (currentHealth <= 0.0f && isAlive)
         {
             Die(direction);
         }
@@ -42,5 +51,8 @@ public class Health : MonoBehaviour
 
         Destroy(GetComponent<NavMeshAgent>());
         Destroy(GetComponent<ZombieAi>());
+        Destroy(GetComponent<SoundRandomiser>());
+        Destroy(GetComponent<AudioSource>());
+        isAlive = false;
     }
 }
