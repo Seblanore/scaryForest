@@ -64,7 +64,8 @@ public class ZombieAi : NetworkBehaviour
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInMeleeAttackRange = Physics.CheckSphere(transform.position, meleeAttackRange, whatIsPlayer);
 
-        if (!playerInSightRange && !playerInMeleeAttackRange) Patroling();
+        // FIXME
+        //if (!playerInSightRange && !playerInMeleeAttackRange) Patroling();
         if (playerInSightRange && !playerInMeleeAttackRange) ChasePlayer();
         if (playerInSightRange && playerInMeleeAttackRange) AttackPlayer();
 
@@ -139,12 +140,11 @@ public class ZombieAi : NetworkBehaviour
 
         walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
 
-        /*TODO FIXME
-         * if(Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
+
+        if(Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
         {
             walkPointSet = true;
-        }*/
-        walkPointSet = true;
+        }
     }
 
     private void ChasePlayer()
@@ -166,6 +166,8 @@ public class ZombieAi : NetworkBehaviour
         if(!alreadyAttacked)
         {
             //Attack code here
+            player.GetComponent<PlayerHealth>().TakeDamage(10f);
+
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
