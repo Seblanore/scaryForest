@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class SoundRandomiser : MonoBehaviour
+public class SoundRandomiser : NetworkBehaviour
 {
     public AudioClip[] idleClips;
     public AudioClip[] chasingClips;
@@ -11,7 +12,7 @@ public class SoundRandomiser : MonoBehaviour
     private AudioSource source;
     private Animator animator;
 
-    private void Start()
+    public override void OnNetworkSpawn()
     {
         source = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
