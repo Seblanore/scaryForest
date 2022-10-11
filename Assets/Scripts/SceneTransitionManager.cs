@@ -1,11 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneTransitionManager : MonoBehaviour
 {
     public FadeScreen fadeScreen;
+
+    public void GoToSceneDisconnect(int sceneIndex)
+    {
+        Disconnect();
+        SceneManager.LoadScene(sceneIndex);
+    }
+
+    void Disconnect()
+    {
+        NetworkManager.Singleton.Shutdown();
+    }
+
     public void GoToScene(int sceneIndex)
     {
         StartCoroutine(GoToSceneRoutine(sceneIndex));
