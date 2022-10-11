@@ -9,7 +9,7 @@ public class BulletTarget : NetworkBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.material.name == "Zombie Flesh (Instance)")
+        /*if(other.material.name == "Zombie Flesh (Instance)")
         {
             Instantiate(blood, transform.position, Quaternion.LookRotation(-transform.forward));
         }
@@ -19,6 +19,6 @@ public class BulletTarget : NetworkBehaviour
         {
             hitBox.OnHit(transform.forward);
         }
-        Destroy(gameObject);
+        Destroy(gameObject);*/
     }
 }

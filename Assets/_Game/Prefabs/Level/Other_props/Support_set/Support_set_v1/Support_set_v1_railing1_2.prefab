@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 33000013024201256}
   - component: {fileID: 23000011399657916}
   - component: {fileID: 65000014159091352}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Support_set_v1_railing1_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

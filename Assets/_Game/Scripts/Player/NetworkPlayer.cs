@@ -11,11 +11,13 @@ public class NetworkPlayer : NetworkBehaviour
     {
         base.OnNetworkSpawn();
 
+        // Hack pour éviter les messages d'erreurs dans la console lié à l'abscense d'audioListener avant l'apparition du joueur
         Destroy(GameObject.Find("AudioListener"));
 
         DisableClientInput();
     }
 
+    // Désactive les input des autres joueurs
     public void DisableClientInput()
     {
         if(IsClient && !IsOwner)
@@ -42,6 +44,7 @@ public class NetworkPlayer : NetworkBehaviour
 
     private void Start()
     {
+        // Placement du joueur dans la zone de Spawn
         if (IsClient && IsOwner)
         {
             transform.position = new Vector3(Random.Range(placementArea.x, placementArea.y), transform.position.y, Random.Range(placementArea.x, placementArea.y));

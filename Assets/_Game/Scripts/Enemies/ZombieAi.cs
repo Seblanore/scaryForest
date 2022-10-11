@@ -6,8 +6,6 @@ using Random = UnityEngine.Random;
 
 public class ZombieAi : NetworkBehaviour
 {
-    
-
     public LayerMask whatIsGround, whatIsPlayer;
 
     private Transform player;
@@ -20,6 +18,7 @@ public class ZombieAi : NetworkBehaviour
     //Attacking
     public float timeBetweenAttacks;
     bool alreadyAttacked;
+    public float damage;
 
     //States
     public float sightRange, meleeAttackRange;
@@ -166,7 +165,7 @@ public class ZombieAi : NetworkBehaviour
         if(!alreadyAttacked)
         {
             //Attack code here
-            player.GetComponent<PlayerHealth>().TakeDamage(10f);
+            player.GetComponent<PlayerHealth>().TakeDamage(damage);
 
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);

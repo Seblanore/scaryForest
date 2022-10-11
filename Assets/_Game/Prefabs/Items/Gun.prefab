@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7391387481565225632}
   - component: {fileID: 7435059491525272785}
   - component: {fileID: 8751218525797194894}
+  - component: {fileID: 4547766242471956536}
   m_Layer: 9
   m_Name: Gun
   m_TagString: Untagged
@@ -186,6 +187,22 @@ MonoBehaviour:
   m_AttachPointCompatibilityMode: 0
   leftAttachTransform: {fileID: 2235171911660606259}
   rightAttachTransform: {fileID: 3121896854200497823}
+--- !u!114 &4547766242471956536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 492659681432120471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &719873232402339272
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,6 +300,7 @@ GameObject:
   - component: {fileID: 8685399939676879149}
   - component: {fileID: 6837032367237323528}
   - component: {fileID: 169800603385785096}
+  - component: {fileID: 8290396080986930680}
   m_Layer: 9
   m_Name: M1911 Handgun_Model
   m_TagString: Untagged
@@ -401,8 +419,9 @@ MonoBehaviour:
   barrelLocation: {fileID: 3062233210385487481}
   casingExitLocation: {fileID: 236678381961548195}
   destroyTimer: 2
-  shotPower: 700
+  shotPower: 5000
   ejectPower: 250
+  rayCastController: {fileID: 8290396080986930680}
   source: {fileID: 169800603385785096}
   fireSound: {fileID: 8300000, guid: aaef5231b452ca64a8642aeff708e1cf, type: 3}
 --- !u!82 &169800603385785096
@@ -501,6 +520,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8290396080986930680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103578844199512587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8abcfa5389d11f419bdd368bf5fc936, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aimColliderMask:
+    serializedVersion: 2
+    m_Bits: 256
+  blood: {fileID: 4047206764224530, guid: 3c657dedc43d33a4987fbf09e6363067, type: 3}
 --- !u!1 &1544303046043077753
 GameObject:
   m_ObjectHideFlags: 0

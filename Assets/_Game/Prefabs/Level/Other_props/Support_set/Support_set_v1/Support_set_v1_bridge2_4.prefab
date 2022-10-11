@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 33000012942390614}
   - component: {fileID: 23000012809737844}
   - component: {fileID: 64000014182231436}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Support_set_v1_bridge2_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -20,6 +20,8 @@ public class SimpleShoot : MonoBehaviour
     [Tooltip("Bullet Speed")] [SerializeField] private float shotPower = 500f;
     [Tooltip("Casing Ejection Speed")] [SerializeField] private float ejectPower = 150f;
 
+    [SerializeField] private RayCastController rayCastController;
+
     public AudioSource source;
     public AudioClip fireSound;
 
@@ -57,8 +59,12 @@ public class SimpleShoot : MonoBehaviour
         { return; }
 
         // Create a bullet and add force on it in direction of the barrel
-        Instantiate(bulletPrefab, barrelLocation.position, barrelLocation.rotation).GetComponent<Rigidbody>().AddForce(barrelLocation.forward * shotPower);
+        GameObject go = Instantiate(bulletPrefab, barrelLocation.position, barrelLocation.rotation) as GameObject;
+        go.GetComponent<Rigidbody>().AddForce(barrelLocation.forward * shotPower);
+        Destroy(go, 2);
 
+        // Shoot rayCast ServerRpc
+        rayCastController.ShootServerRpc(barrelLocation.position, barrelLocation.forward);
     }
 
     //This function creates a casing at the ejection slot

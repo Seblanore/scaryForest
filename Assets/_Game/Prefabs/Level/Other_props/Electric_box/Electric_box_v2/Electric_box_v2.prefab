@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 33000012696745758}
   - component: {fileID: 23000012968336936}
   - component: {fileID: 65000012703749748}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Electric_box_v2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

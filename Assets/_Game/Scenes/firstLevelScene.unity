@@ -30992,6 +30992,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gun
       objectReference: {fileID: 0}
+    - target: {fileID: 4547766242471956536, guid: cadd7931d5e57c440a1c587d241808a7,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 968033840
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138640994632256187, guid: cadd7931d5e57c440a1c587d241808a7,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2362718906
+      objectReference: {fileID: 0}
     - target: {fileID: 7391387481565225632, guid: cadd7931d5e57c440a1c587d241808a7,
         type: 3}
       propertyPath: m_RootOrder
@@ -41238,6 +41248,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Gun (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4547766242471956536, guid: cadd7931d5e57c440a1c587d241808a7,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1437476860
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138640994632256187, guid: cadd7931d5e57c440a1c587d241808a7,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3175436556
       objectReference: {fileID: 0}
     - target: {fileID: 7391387481565225632, guid: cadd7931d5e57c440a1c587d241808a7,
         type: 3}
