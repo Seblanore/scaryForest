@@ -6,13 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/PreLoading.unity
+    path: Assets/_Game/Scenes/MainMenuScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scenes/mainScene.unity
+    path: Assets/_Game/Scenes/firstLevelScene.unity
     guid: 451ab20a9229c62409ac0d4e666dc5ee
   - enabled: 1
-    path: Assets/Scenes/GameOverScene.unity
+    path: Assets/_Game/Scenes/GameOverScene.unity
     guid: 4948e34d22616f24f93e22822f65c36b
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 95e1f32cf7ce1e24ebef2d0e857ac0d7,
