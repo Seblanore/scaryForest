@@ -64,14 +64,105 @@ public class ZombieAi : NetworkBehaviour
         playerInMeleeAttackRange = Physics.CheckSphere(transform.position, meleeAttackRange, whatIsPlayer);
 
         // FIXME
-        //if (!playerInSightRange && !playerInMeleeAttackRange) Patroling();
+        if (!playerInSightRange && !playerInMeleeAttackRange) Patroling();
         if (playerInSightRange && !playerInMeleeAttackRange) ChasePlayer();
         if (playerInSightRange && playerInMeleeAttackRange) AttackPlayer();
 
         //SynchronizeAnimatorAndAgent();
     }
 
+    private void Patroling()
+    {
+        if (!walkPointSet) SearchWalkPoint();
 
+        if (walkPointSet)
+            Agent.SetDestination(walkPoint);
+
+        Vector3 distanceToWalkPoint = transform.position - walkPoint;
+
+        // WalkPoint reached
+        if (distanceToWalkPoint.magnitude < 1f)
+            walkPointSet = false;
+
+        Animator.SetBool("move", true);
+        Animator.SetBool("attack", false);
+        Animator.SetBool("chase", false);
+    }
+
+    private void SearchWalkPoint()
+    {
+        //Calculte random point in range
+        float randomZ = Random.Range(-walkPointRange, walkPointRange);
+        float randomX = Random.Range(-walkPointRange, walkPointRange);
+
+        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y+0.2f, transform.position.z + randomZ);
+
+        Ray ray = new Ray(walkPoint, -transform.up);
+        if (Physics.Raycast(ray, out RaycastHit rayHit, 2f, whatIsGround))
+        {
+            walkPointSet = true;
+        }
+        
+    }
+
+    private void ChasePlayer()
+    {
+        Agent.SetDestination(player.position);
+        Animator.SetBool("chase", true);
+        Animator.SetBool("move", false);
+        Animator.SetBool("attack", false);
+        
+    }
+
+    private void AttackPlayer()
+    {
+        //Make sure enemy doesn't move
+        Agent.SetDestination(transform.position);
+
+        transform.LookAt(player);
+
+        if(!alreadyAttacked)
+        {
+            Debug.Log("Zombie attacked player " + player);
+            //Attack code here
+            player.GetComponent<PlayerHealth>().TakeDamage(damage);
+
+            alreadyAttacked = true;
+            Invoke(nameof(ResetAttack), timeBetweenAttacks);
+        }
+        Animator.SetBool("attack", true);
+        Animator.SetBool("move", false);
+        Animator.SetBool("chase", false);
+    }
+
+    private void ResetAttack()
+    {
+        alreadyAttacked = false;
+    }
+
+    // Return the closest player
+    public Transform FindTarget()
+    {
+        GameObject[] candidates = GameObject.FindGameObjectsWithTag("Player");
+        float minDistance = Mathf.Infinity;
+        Transform closest;
+
+        if (candidates.Length == 0)
+            return null;
+
+        closest = candidates[0].transform;
+        for (int i = 0; i < candidates.Length; ++i)
+        {
+            float distance = (candidates[i].transform.position - transform.position).sqrMagnitude;
+
+            if (distance < minDistance)
+            {
+                closest = candidates[i].transform;
+                minDistance = distance;
+            }
+        }
+        return closest;
+    }
 
     private void SynchronizeAnimatorAndAgent()
     {
@@ -111,97 +202,6 @@ public class ZombieAi : NetworkBehaviour
                 smooth
             );
         }
-    }
-
-    private void Patroling()
-    {
-        if (!walkPointSet) SearchWalkPoint();
-
-        if (walkPointSet)
-            Agent.SetDestination(walkPoint);
-
-        Vector3 distanceToWalkPoint = transform.position - walkPoint;
-
-        // WalkPoint reached
-        if (distanceToWalkPoint.magnitude < 1f)
-            walkPointSet = false;
-
-        Animator.SetBool("move", true);
-        Animator.SetBool("attack", false);
-        Animator.SetBool("chase", false);
-    }
-
-    private void SearchWalkPoint()
-    {
-        //Calculte random point in range
-        float randomZ = Random.Range(-walkPointRange, walkPointRange);
-        float randomX = Random.Range(-walkPointRange, walkPointRange);
-
-        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
-
-
-        if(Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
-        {
-            walkPointSet = true;
-        }
-    }
-
-    private void ChasePlayer()
-    {
-        Agent.SetDestination(player.position);
-        Animator.SetBool("chase", true);
-        Animator.SetBool("move", false);
-        Animator.SetBool("attack", false);
-        
-    }
-
-    private void AttackPlayer()
-    {
-        //Make sure enemy doesn't move
-        Agent.SetDestination(transform.position);
-
-        transform.LookAt(player);
-
-        if(!alreadyAttacked)
-        {
-            //Attack code here
-            player.GetComponent<PlayerHealth>().TakeDamage(damage);
-
-            alreadyAttacked = true;
-            Invoke(nameof(ResetAttack), timeBetweenAttacks);
-        }
-        Animator.SetBool("attack", true);
-        Animator.SetBool("move", false);
-        Animator.SetBool("chase", false);
-    }
-
-    private void ResetAttack()
-    {
-        alreadyAttacked = false;
-    }
-
-    // Return the closest player
-    public Transform FindTarget()
-    {
-        GameObject[] candidates = GameObject.FindGameObjectsWithTag("Player");
-        float minDistance = Mathf.Infinity;
-        Transform closest;
-
-        if (candidates.Length == 0)
-            return null;
-
-        closest = candidates[0].transform;
-        for (int i = 0; i < candidates.Length; ++i)
-        {
-            float distance = (candidates[i].transform.position - transform.position).sqrMagnitude;
-
-            if (distance < minDistance)
-            {
-                closest = candidates[i].transform;
-                minDistance = distance;
-            }
-        }
-        return closest;
     }
 
 }

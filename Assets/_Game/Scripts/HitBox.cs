@@ -1,10 +1,12 @@
+using Unity.Netcode;
 using UnityEngine;
 
-public class HitBox : MonoBehaviour
+public class HitBox : NetworkBehaviour
 {
     public Health health;
 
-    public void OnHit(Vector3 direction)
+    [ClientRpc]
+    public void OnHitClientRpc(Vector3 direction)
     {
         Rigidbody rb = GetComponent<Rigidbody>();
         float damage;

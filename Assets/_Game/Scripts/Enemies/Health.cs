@@ -35,14 +35,17 @@ public class Health : MonoBehaviour
         if(isAlive)
         {
             currentHealth -= amount;
-            source.Stop();
-            source.clip = damagedClips[Random.Range(0, damagedClips.Length)];
-            source.Play();
 
             if (currentHealth <= 0.0f)
             {
                 Die(direction, rb);
+            } else
+            {
+                source.Stop();
+                source.clip = damagedClips[Random.Range(0, damagedClips.Length)];
+                source.Play();
             }
+
         } else
         {
             direction.y = 1;

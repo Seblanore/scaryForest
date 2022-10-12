@@ -21,17 +21,26 @@ public class RayCastController : NetworkBehaviour
             collider = raycastHit.collider;
         }
 
-        if (collider.material.name == "Zombie Flesh (Instance)")
+        if (collider && hitTransform)
         {
-            Transform t = Instantiate(blood, hitTransform.position, Quaternion.LookRotation(-direction));
-            Destroy(t, 2);
-        }
+            if (collider.material.name == "Zombie Flesh (Instance)")
+            {
+                BloodExplosionClientRpc(hitTransform.position, direction);
+            }
 
-        var hitBox = collider.GetComponent<HitBox>();
-        if (hitBox)
-        {
-            hitBox.OnHit(direction);
+            var hitBox = collider.GetComponent<HitBox>();
+            if (hitBox)
+            {
+                hitBox.OnHitClientRpc(direction);
+            }
         }
+    }
+
+    [ClientRpc]
+    public void BloodExplosionClientRpc(Vector3 position, Vector3 direction)
+    {
+        Transform t = Instantiate(blood, position, Quaternion.LookRotation(-direction));
+        Destroy(t.gameObject, 2);
     }
 
 

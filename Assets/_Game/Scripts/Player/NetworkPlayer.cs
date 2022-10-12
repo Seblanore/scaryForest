@@ -27,18 +27,22 @@ public class NetworkPlayer : NetworkBehaviour
             var clientTurnProvider = GetComponent<ActionBasedSnapTurnProvider>();
             var clientHead = GetComponentInChildren<TrackedPoseDriver>();
             var clientCamera = GetComponentInChildren<Camera>();
+            var clientAudioListener = GetComponentInChildren<AudioListener>();
+
 
             clientCamera.enabled = false;
             clientMoveProvider.enableInputActions = false;
             clientTurnProvider.enableTurnLeftRight = false;
             clientTurnProvider.enableTurnAround = false;
             clientHead.enabled = false;
+            DestroyImmediate(clientAudioListener);
 
-            foreach(var controller in clientControllers)
+            foreach (var controller in clientControllers)
             {
                 controller.enableInputActions = false;
                 controller.enableInputTracking = false;
             }
+
         }
     }
 
@@ -48,6 +52,33 @@ public class NetworkPlayer : NetworkBehaviour
         if (IsClient && IsOwner)
         {
             transform.position = new Vector3(Random.Range(placementArea.x, placementArea.y), transform.position.y, Random.Range(placementArea.x, placementArea.y));
+        }
+    }
+
+    public void OnSelectGrabbable(SelectEnterEventArgs eventArgs)
+    {
+        if(IsClient && IsOwner)
+        {
+            NetworkObject networkObjectSelected = eventArgs.interactableObject.transform.GetComponent<NetworkObject>();
+            if(networkObjectSelected != null)
+            {
+                // request ownership from the server
+                RequestGrabbableOwnershipServerRpc(OwnerClientId, networkObjectSelected);
+            }
+        }
+    }
+
+    [ServerRpc]
+    public void RequestGrabbableOwnershipServerRpc(ulong newOwnerClientId, NetworkObjectReference networkObjectReference)
+    {
+        if(networkObjectReference.TryGet(out NetworkObject networkObject))
+        {
+            Debug.Log("changing ownership : " + newOwnerClientId);
+            networkObject.ChangeOwnership(newOwnerClientId);
+        }
+        else
+        {
+            Debug.Log("Unable to change ownership" + newOwnerClientId);
         }
     }
 }
