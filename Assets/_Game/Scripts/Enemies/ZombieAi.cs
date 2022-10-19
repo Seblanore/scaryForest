@@ -125,7 +125,9 @@ public class ZombieAi : NetworkBehaviour
         {
             Debug.Log("Zombie attacked player " + player);
             //Attack code here
-            player.GetComponent<PlayerHealth>().TakeDamage(damage);
+            NetworkObject netObj = player.GetComponent<NetworkObject>();
+            
+            UpdatePlayerHealthServerRpc(damage, netObj.OwnerClientId);
 
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
@@ -133,6 +135,27 @@ public class ZombieAi : NetworkBehaviour
         Animator.SetBool("attack", true);
         Animator.SetBool("move", false);
         Animator.SetBool("chase", false);
+    }
+
+    [ServerRpc]
+    public void UpdatePlayerHealthServerRpc(float damage, ulong clientId) {
+        var playerHealth = NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject.GetComponent<PlayerHealth>();
+        if(playerHealth) 
+            playerHealth.currentHealth -= damage;
+
+        NotifyPlayerTakeDamageClientRpc(damage, new ClientRpcParams{
+            Send = new ClientRpcSendParams {
+                TargetClientIds = new ulong[] {clientId}
+            }
+        });
+    }
+
+    [ClientRpc]
+    public void NotifyPlayerTakeDamageClientRpc(float damage, ClientRpcParams clientRpcParams = default)
+    {
+        if(!IsOwner) return;
+
+        NetworkManager.LocalClient.PlayerObject.GetComponent<PlayerHealth>().TakeDamage(damage);
     }
 
     private void ResetAttack()
